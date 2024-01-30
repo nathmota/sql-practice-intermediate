@@ -20,14 +20,15 @@ select
     price as originalprice,
     case 
         when price > 10 then '15%'
-        when price > 6 then '10%'      /* could also use between 7 and 10 */
-        when price <= 6 then '5%'
+        when price > 6 then '10%'
+        else '5%'
     end as discountpercent,  
-    case 
-        when price > 10 then round((price - price * 0.15), 2)
-        when price > 6 then round((price - price * 0.10), 2)
-        when price <= 6 then round((price - price * 0.05), 2)
-    end as discountedprice
+    round(price - price * 
+        case 
+            when price > 10 then 0.15
+            when price > 6 then 0.10
+            else 0.05
+        end, 2) as discountedprice
 from dishes
 order by name;
 
