@@ -20,7 +20,7 @@ select
     price as originalprice,
     case 
         when price > 10 then '15%'
-        when price > 6 then '10%'
+        when price > 6 then '10%'      /* could also use between 7 and 10 */
         when price <= 6 then '5%'
     end as discountpercent,  
     case 
